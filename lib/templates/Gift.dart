@@ -6,10 +6,12 @@ import '../main.dart';
 /// ![](https://raw.githubusercontent.com/jaweii/Flutter_beautiful_popup/master/img/bg/gift.png)
 class TemplateGift extends BeautifulPopupTemplate {
   final BeautifulPopup options;
+
   TemplateGift(this.options) : super(options);
 
   @override
   final illustrationPath = 'img/bg/gift.png';
+
   @override
   Color get primaryColor => options.primaryColor ?? Color(0xffFF2F49);
   @override
@@ -18,6 +20,7 @@ class TemplateGift extends BeautifulPopupTemplate {
   final maxHeight = 580;
   @override
   final bodyMargin = 30;
+
   @override
   BeautifulPopupButton get button {
     return ({
@@ -43,11 +46,25 @@ class TemplateGift extends BeautifulPopupTemplate {
         ),
       );
       final minHeight = 40.0 - (outline ? 4 : 0);
-      return RaisedButton(
-        color: Colors.transparent,
-        elevation: elevation,
-        highlightElevation: 0,
-        splashColor: Colors.transparent,
+      return ElevatedButton(
+        // color: Colors.transparent,
+        // elevation: elevation,
+        // highlightElevation: 0,
+        // splashColor: Colors.transparent,
+
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          elevation: 0,
+          splashFactory: InkSplash.splashFactory,
+          // textStyle: TextStyle(
+          // color: Colors.black,
+          // fontSize: 40,
+          // fontStyle: FontStyle.italic
+          // ),
+        ),
+        onPressed: onPressed,
         child: Ink(
           decoration: decoration,
           child: Container(
@@ -65,11 +82,6 @@ class TemplateGift extends BeautifulPopupTemplate {
             ),
           ),
         ),
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        onPressed: onPressed,
       );
     };
   }

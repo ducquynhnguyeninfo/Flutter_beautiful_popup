@@ -7,10 +7,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 /// ![](https://raw.githubusercontent.com/jaweii/Flutter_beautiful_popup/master/img/bg/thumb.png)
 class TemplateThumb extends BeautifulPopupTemplate {
   final BeautifulPopup options;
+
   TemplateThumb(this.options) : super(options);
 
   @override
   final illustrationPath = 'img/bg/thumb.png';
+
   @override
   Color get primaryColor => options.primaryColor ?? Color(0xfffb675d);
   @override
@@ -71,11 +73,13 @@ class TemplateThumb extends BeautifulPopupTemplate {
         ),
       );
       final minHeight = 40.0 - (outline ? 2 : 0);
-      return RaisedButton(
-        color: Colors.transparent,
-        elevation: elevation,
-        highlightElevation: 0,
-        splashColor: Colors.transparent,
+      return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+            ),
+            splashFactory: InkRipple.splashFactory),
         child: Ink(
           decoration: decoration,
           child: Container(
@@ -91,10 +95,6 @@ class TemplateThumb extends BeautifulPopupTemplate {
               ).merge(labelStyle),
             ),
           ),
-        ),
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
         ),
         onPressed: onPressed,
       );

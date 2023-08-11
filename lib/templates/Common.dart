@@ -14,6 +14,7 @@ typedef Widget BeautifulPopupButton({
 /// You can extend this class to custom your own template.
 abstract class BeautifulPopupTemplate extends StatefulWidget {
   final BeautifulPopup options;
+
   BeautifulPopupTemplate(this.options);
 
   final State<StatefulWidget> state = BeautifulPopupTemplateState();
@@ -43,16 +44,21 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
   }
 
   double get width => size.width;
+
   double get height => size.height;
 
   double get maxWidth;
+
   double get maxHeight;
+
   double get bodyMargin;
 
   /// The path of the illustration asset.
   String get illustrationPath => '';
+
   String get illustrationKey =>
       'packages/flutter_beautiful_popup/$illustrationPath';
+
   Color get primaryColor;
 
   double percentW(double n) {
@@ -182,11 +188,17 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         ),
       );
       final minHeight = 40.0 - (outline ? 2 : 0);
-      return RaisedButton(
-        color: Colors.transparent,
-        elevation: elevation,
-        highlightElevation: 0,
-        splashColor: Colors.transparent,
+      return ElevatedButton(
+        // color: Colors.transparent,
+        // elevation: elevation,
+        // highlightElevation: 0,
+        // splashColor: Colors.transparent,
+        style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+            ),
+            splashFactory: InkRipple.splashFactory),
         child: Ink(
           decoration: decoration,
           child: Container(
@@ -203,10 +215,6 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
             ),
           ),
         ),
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
         onPressed: onPressed,
       );
     };
@@ -217,6 +225,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
 
 class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
   OverlayEntry? closeEntry;
+
   @override
   void initState() {
     super.initState();
@@ -231,7 +240,8 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
                   4 -
               20;
           return Stack(
-            overflow: Overflow.visible,
+            // overflow: Overflow.visible,
+
             children: <Widget>[
               Positioned(
                 child: Container(
@@ -264,7 +274,7 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
             height: widget.height,
             width: widget.width,
             child: Stack(
-              overflow: Overflow.visible,
+              // overflow: Overflow.visible,
               children: widget.layout,
             ),
           ),
@@ -282,6 +292,7 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
 
 class ImageEditor extends CustomPainter {
   ui.Image image;
+
   ImageEditor({
     required this.image,
   });
