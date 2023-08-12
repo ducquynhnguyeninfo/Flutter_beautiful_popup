@@ -9,6 +9,8 @@ typedef Widget BeautifulPopupButton({
   TextStyle labelStyle,
   bool outline,
   bool flat,
+  ButtonStyle? buttonStyle,
+  BoxDecoration? decoration,
 });
 
 /// You can extend this class to custom your own template.
@@ -171,15 +173,17 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
       bool outline = false,
       bool flat = false,
       TextStyle labelStyle = const TextStyle(),
+      ButtonStyle? buttonStyle,
+      BoxDecoration? decoration,
     }) {
-      final gradient = LinearGradient(colors: [
-        primaryColor.withOpacity(0.5),
-        primaryColor,
-      ]);
+     final gradient = LinearGradient(colors: [
+     primaryColor.withOpacity(0.8),
+     primaryColor,
+     ]);
       final double elevation = (outline || flat) ? 0 : 2;
       final labelColor =
           (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
-      final decoration = BoxDecoration(
+      final boxDecoration = decoration ?? BoxDecoration(
         gradient: (outline || flat) ? null : gradient,
         borderRadius: BorderRadius.all(Radius.circular(80.0)),
         border: Border.all(
@@ -187,6 +191,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
           width: (outline && !flat) ? 1 : 0,
         ),
       );
+
       final minHeight = 40.0 - (outline ? 2 : 0);
       return ElevatedButton(
         // color: Colors.transparent,
@@ -198,9 +203,9 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
             ),
-            splashFactory: InkRipple.splashFactory),
+            splashFactory: InkRipple.splashFactory).merge(buttonStyle),
         child: Ink(
-          decoration: decoration,
+          decoration: boxDecoration,
           child: Container(
             constraints: BoxConstraints(
               minWidth: 100,

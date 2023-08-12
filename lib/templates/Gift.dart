@@ -29,6 +29,8 @@ class TemplateGift extends BeautifulPopupTemplate {
       bool outline = false,
       bool flat = false,
       TextStyle labelStyle = const TextStyle(),
+      ButtonStyle? buttonStyle,
+      BoxDecoration? decoration,
     }) {
       final gradient = LinearGradient(colors: [
         primaryColor.withOpacity(0.5),

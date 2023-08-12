@@ -100,7 +100,7 @@ class BeautifulPopup {
   BeautifulPopup({
     required BuildContext context,
     required Type? template,
-  })   : _context = context,
+  })  : _context = context,
         _template = template {
     primaryColor = instance.primaryColor; // Get the default primary color.
   }
@@ -151,7 +151,7 @@ class BeautifulPopup {
   ///
   /// `content`: Must be a `String` or `Widget`. Defaults to `''`.
   ///
-  /// `actions`: The set of actions that are displaed at bottom of the dialog,
+  /// `actions`: The set of actions that are displayed at bottom of the dialog,
   ///
   ///  Typically this is a list of [BeautifulPopup.button]. Defaults to `[]`.
   ///
