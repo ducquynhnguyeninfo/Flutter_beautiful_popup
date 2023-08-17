@@ -165,8 +165,8 @@ class BeautifulPopup {
     bool barrierDismissible = false,
     Widget? close,
   }) {
-    this.title = title;
-    this.content = content;
+    this.title = title ?? this.title;
+    this.content = content ?? this.content;
     this.actions = actions;
     this.barrierDismissible = barrierDismissible;
     this.close = close ?? instance.close;
