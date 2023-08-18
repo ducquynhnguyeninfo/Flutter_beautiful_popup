@@ -198,4 +198,7 @@ class BeautifulPopup {
   }
 
   BeautifulPopupButton get button => instance.button;
+  void dismiss() {
+    instance.dismiss();
+  }
 }

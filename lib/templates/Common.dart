@@ -87,15 +87,30 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
     );
   }
 
+  void dismiss() {
+    Navigator.of(options.context).pop();
+  }
+
   Widget get background {
     final illustration = options.illustration;
     return illustration == null
-        ? Image.asset(
-            illustrationKey,
-            width: percentW(100),
-            height: percentH(100),
-            fit: BoxFit.fill,
-          )
+        ? illustrationPath.isNotEmpty
+            ? Image.asset(
+                illustrationKey,
+                width: percentW(100),
+                height: percentH(100),
+                fit: BoxFit.fill,
+              )
+            : Center(
+                child: Container(
+                  width: percentW(80),
+                  height: percentH(85),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              )
         : CustomPaint(
             size: Size(percentW(100), percentH(100)),
             painter: ImageEditor(
@@ -176,21 +191,22 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
       ButtonStyle? buttonStyle,
       BoxDecoration? decoration,
     }) {
-     final gradient = LinearGradient(colors: [
-     primaryColor.withOpacity(0.8),
-     primaryColor,
-     ]);
+      final gradient = LinearGradient(colors: [
+        primaryColor.withOpacity(0.8),
+        primaryColor,
+      ]);
       final double elevation = (outline || flat) ? 0 : 2;
       final labelColor =
           (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
-      final boxDecoration = decoration ?? BoxDecoration(
-        gradient: (outline || flat) ? null : gradient,
-        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-        border: Border.all(
-          color: outline ? primaryColor : Colors.transparent,
-          width: (outline && !flat) ? 1 : 0,
-        ),
-      );
+      final boxDecoration = decoration ??
+          BoxDecoration(
+            gradient: (outline || flat) ? null : gradient,
+            borderRadius: BorderRadius.all(Radius.circular(80.0)),
+            border: Border.all(
+              color: outline ? primaryColor : Colors.transparent,
+              width: (outline && !flat) ? 1 : 0,
+            ),
+          );
 
       final minHeight = 40.0 - (outline ? 2 : 0);
       return ElevatedButton(
@@ -199,11 +215,12 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         // highlightElevation: 0,
         // splashColor: Colors.transparent,
         style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-            splashFactory: InkRipple.splashFactory).merge(buttonStyle),
+                padding: EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                splashFactory: InkRipple.splashFactory)
+            .merge(buttonStyle),
         child: Ink(
           decoration: boxDecoration,
           child: Container(
